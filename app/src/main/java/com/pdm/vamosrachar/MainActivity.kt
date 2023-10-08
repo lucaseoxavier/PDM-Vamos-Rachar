@@ -12,17 +12,19 @@ import androidx.appcompat.app.AppCompatActivity
 import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
-    private val tag = javaClass.name
+    private val TAG = MainActivity::class.simpleName
 
     private lateinit var textToSpeech: TextToSpeech
-    private var resultValue = 0.0
+    private var resultValue: Double? = 0.0
+    private var moneySpentValue = 0.0
+    private var peopleToShareValue = 0
 
     private val textToSpeechListener = TextToSpeech.OnInitListener { status ->
         if (status == TextToSpeech.SUCCESS) {
             textToSpeech.language = Locale.getDefault()
-            Log.i(tag, "Success to initialize TTS engine.")
+            Log.i(TAG, "Success to initialize TTS engine.")
         } else {
-            Log.e(tag, "Failed to initialize TTS engine.")
+            Log.e(TAG, "Failed to initialize TTS engine.")
         }
     }
 
@@ -34,9 +36,7 @@ class MainActivity : AppCompatActivity() {
         textToSpeech = TextToSpeech(this@MainActivity, textToSpeechListener)
 
         val moneySpent = findViewById<EditText>(R.id.moneySpent)
-        val moneySpentValue = if ( ! moneySpent.text.isNullOrEmpty()) moneySpent.text.toString().toDouble() else 0.0
         val peopleToShare = findViewById<EditText>(R.id.peopleToShare)
-        val peopleToShareValue = if ( ! peopleToShare.text.isNullOrEmpty()) peopleToShare.text.toString().toInt() else 0
         val resultField = findViewById<TextView>(R.id.resultField)
         val speakButton = findViewById<Button>(R.id.speakButton)
         val shareButton = findViewById<Button>(R.id.shareButton)
@@ -47,8 +47,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                resultValue = moneySpentValue/peopleToShareValue
-                resultField.text = resultValue.toString()
+                displayCalculatedValue(moneySpent, peopleToShare, resultField)
             }
 
             override fun afterTextChanged(s: Editable?) {
@@ -67,8 +66,25 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun displayCalculatedValue(moneySpent: EditText, peopleToShare: EditText, resultField: TextView){
+        moneySpentValue = if ( ! moneySpent.text.isNullOrEmpty()) moneySpent.text.toString().toDouble() else 0.0
+        peopleToShareValue = if ( ! peopleToShare.text.isNullOrEmpty()) peopleToShare.text.toString().toInt() else 0
+
+        if (peopleToShareValue == 0) {
+            resultField.text = "Insira o número de pessoas"
+            resultValue = null
+        } else {
+            resultValue = moneySpentValue/peopleToShareValue
+            resultField.text = formatDouble(resultValue!!)
+        }
+    }
+
     private fun onSpeakClick() {
-        textToSpeech.speak(resultValue.toString(), TextToSpeech.QUEUE_FLUSH, null, null)
+        resultValue?.let { textToSpeech.speak(formatDouble(it), TextToSpeech.QUEUE_FLUSH, null, null) }
+    }
+
+    private fun formatDouble(resultValue: Double): String {
+        return String.format("%.2f", resultValue)
     }
 
     override fun onDestroy() {
