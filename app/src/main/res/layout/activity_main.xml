@@ -6,67 +6,91 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <View
+        android:id="@+id/resultBackground"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="#7C45B3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/lets_split"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/moneySpent"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toTopOf="@id/resultBackground"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
-
-    <EditText
-        android:id="@+id/moneySpent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Valor"
-        android:inputType="number"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <EditText
-        android:id="@+id/peopleToShare"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Pessoas"
-        android:inputType="number"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/moneySpent" />
 
     <TextView
         android:id="@+id/resultField"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="0.0"
-        app:layout_constraintTop_toBottomOf="@id/peopleToShare"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        />
+        android:text="R$ 0.00"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="@id/resultBackground"
+        app:layout_constraintStart_toStartOf="parent"  />
 
-    <Button
-        android:id="@+id/speakButton"
+    <EditText
+        android:id="@+id/moneySpent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Falar"
-        android:contentDescription="Compre suas cartas Pokemon"
+        android:ems="16"
+        android:hint="Valor"
+        android:inputType="numberDecimal"
+        android:layout_marginTop="36dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/resultField"
-        app:layout_constraintEnd_toStartOf="@+id/shareButton" />
+        app:layout_constraintTop_toBottomOf="@+id/resultBackground" />
 
-    <Button
+    <EditText
+        android:id="@+id/peopleToShare"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="16"
+        android:hint="Pessoas"
+        android:inputType="number"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/moneySpent" />
+
+    <ImageButton
         android:id="@+id/shareButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Comprar"
-        android:contentDescription="Compre suas cartas Pokemon"
-        app:layout_constraintTop_toTopOf="@+id/speakButton"
-        app:layout_constraintStart_toEndOf="@+id/speakButton"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:srcCompat="@drawable/ic_share"
+        app:tint="#FFFFFF"
+        android:backgroundTint="@android:color/transparent"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintTop_toTopOf="@id/resultBackground"
+        app:layout_constraintEnd_toEndOf="@id/resultBackground" />
+
+    <ImageButton
+        android:id="@+id/speakButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_speaker"
+        android:backgroundTint="#7C45B3"
+        app:tint="#FFFFFF"
+        android:paddingHorizontal="56dp"
+        android:paddingVertical="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/peopleToShare" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
