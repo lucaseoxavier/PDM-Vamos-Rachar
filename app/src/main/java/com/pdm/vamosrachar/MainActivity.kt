@@ -1,12 +1,13 @@
 package com.pdm.vamosrachar
 
+import android.content.Intent
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import java.util.Locale
@@ -38,8 +39,8 @@ class MainActivity : AppCompatActivity() {
         val moneySpent = findViewById<EditText>(R.id.moneySpent)
         val peopleToShare = findViewById<EditText>(R.id.peopleToShare)
         val resultField = findViewById<TextView>(R.id.resultField)
-        val speakButton = findViewById<Button>(R.id.speakButton)
-        val shareButton = findViewById<Button>(R.id.shareButton)
+        val speakButton = findViewById<ImageButton>(R.id.speakButton)
+        val shareButton = findViewById<ImageButton>(R.id.shareButton)
 
         val textWatcher = object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -63,10 +64,20 @@ class MainActivity : AppCompatActivity() {
         }
 
         shareButton.setOnClickListener {
+            resultValue?.let {
+                val sendIntent: Intent = Intent().apply {
+                    action = Intent.ACTION_SEND
+                    putExtra(Intent.EXTRA_TEXT, "O valor para cada um é ${formatDouble(it)}")
+                    type = "text/plain"
+                }
+
+                val shareIntent = Intent.createChooser(sendIntent, null)
+                startActivity(shareIntent)
+            }
         }
     }
 
-    private fun displayCalculatedValue(moneySpent: EditText, peopleToShare: EditText, resultField: TextView){
+    private fun displayCalculatedValue(moneySpent: EditText, peopleToShare: EditText, resultField: TextView) {
         moneySpentValue = if ( ! moneySpent.text.isNullOrEmpty()) moneySpent.text.toString().toDouble() else 0.0
         peopleToShareValue = if ( ! peopleToShare.text.isNullOrEmpty()) peopleToShare.text.toString().toInt() else 0
 
@@ -75,7 +86,8 @@ class MainActivity : AppCompatActivity() {
             resultValue = null
         } else {
             resultValue = moneySpentValue/peopleToShareValue
-            resultField.text = formatDouble(resultValue!!)
+            val result = "R$ ${formatDouble(resultValue!!)}"
+            resultField.text = result
         }
     }
 
