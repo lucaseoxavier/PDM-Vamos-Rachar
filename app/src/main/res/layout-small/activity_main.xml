@@ -9,7 +9,10 @@
     <View
         android:id="@+id/resultBackground"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginVertical="16dp"
+        android:layout_marginTop="16dp"
         android:background="?android:colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,34 +36,40 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/result"
-        android:textSize="32sp"
-        android:textStyle="bold"
         android:textColor="@color/white"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="@id/resultBackground"
-        app:layout_constraintStart_toStartOf="parent"  />
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginTop="64dp"
+        app:layout_constraintEnd_toEndOf="@+id/resultBackground"
+        app:layout_constraintStart_toStartOf="@id/resultBackground"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
 
     <EditText
         android:id="@+id/moneySpent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="16"
-        android:hint="@string/valor"
-        android:inputType="numberDecimal"
         android:layout_marginTop="36dp"
+        android:ems="10"
+        android:hint="Valor"
+        android:inputType="numberDecimal"
+        android:backgroundTint="@color/white"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/resultBackground" />
+        app:layout_constraintTop_toBottomOf="@+id/resultField" />
 
     <EditText
         android:id="@+id/peopleToShare"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="16"
-        android:hint="@string/pessoas"
+        android:ems="10"
+        android:hint="Pessoas"
         android:inputType="number"
         android:layout_marginTop="16dp"
+        android:backgroundTint="@color/white"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/moneySpent" />
@@ -81,16 +90,13 @@
         android:id="@+id/speakButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="13dp"
+        android:backgroundTint="@android:color/transparent"
+        app:layout_constraintEnd_toEndOf="@+id/resultBackground"
+        app:layout_constraintTop_toBottomOf="@+id/shareButton"
         app:srcCompat="@drawable/ic_speaker"
-        android:backgroundTint="?android:colorPrimary"
-        app:tint="@color/white"
-        android:paddingHorizontal="56dp"
-        android:paddingVertical="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/peopleToShare" />
-
+        app:tint="@color/white" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

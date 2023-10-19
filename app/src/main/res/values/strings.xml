@@ -1,4 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">vamosRachar</string>
-    <string name="lets_split">Vamos Rachar!</string>
+    <string name="vamos_rachar">Vamos Rachar!</string>
+    <string name="valor">Valor</string>
+    <string name="pessoas">Pessoas</string>
+    <string name="result">R$ 0.00</string>
+    <string name="insira_pessoas">Insira o número de pessoas</string>
 </resources>

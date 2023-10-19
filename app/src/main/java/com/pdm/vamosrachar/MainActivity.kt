@@ -82,7 +82,7 @@ class MainActivity : AppCompatActivity() {
         peopleToShareValue = if ( ! peopleToShare.text.isNullOrEmpty()) peopleToShare.text.toString().toInt() else 0
 
         if (peopleToShareValue == 0) {
-            resultField.text = "Insira o número de pessoas"
+            resultField.text = getString(R.string.insira_pessoas)
             resultValue = null
         } else {
             resultValue = moneySpentValue/peopleToShareValue
